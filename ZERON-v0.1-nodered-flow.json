@@ -40,7 +40,7 @@
         "id": "b1c0b191640a62ab",
         "type": "http request",
         "z": "bd0c2caf9a83559f",
-        "name": "HERON API",
+        "name": "heron api",
         "method": "GET",
         "ret": "obj",
         "paytoqs": "ignore",
@@ -52,7 +52,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 330,
+        "x": 320,
         "y": 40,
         "wires": [
             [
