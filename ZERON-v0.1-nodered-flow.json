@@ -233,7 +233,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "0",
+                "to": "2",
                 "tot": "num"
             }
         ],
@@ -271,20 +271,10 @@
         "id": "591ded9841f062c7",
         "type": "comment",
         "z": "bd0c2caf9a83559f",
-        "name": "<dESS or AC system control node here!>",
+        "name": "<VE.bus System Control  here - switch position>",
         "info": "",
-        "x": 880,
+        "x": 900,
         "y": 140,
-        "wires": []
-    },
-    {
-        "id": "de1017998de3e51a",
-        "type": "comment",
-        "z": "bd0c2caf9a83559f",
-        "name": "<dESS or AC system control node here!>",
-        "info": "",
-        "x": 880,
-        "y": 280,
         "wires": []
     },
     {
@@ -301,6 +291,16 @@
         "statusType": "auto",
         "x": 800,
         "y": 440,
+        "wires": []
+    },
+    {
+        "id": "8993eba8fc6dedd9",
+        "type": "comment",
+        "z": "bd0c2caf9a83559f",
+        "name": "<VE.bus System Control  here - switch position>",
+        "info": "",
+        "x": 900,
+        "y": 280,
         "wires": []
     }
 ]
