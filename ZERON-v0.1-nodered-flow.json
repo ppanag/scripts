@@ -1,0 +1,306 @@
+[
+    {
+        "id": "bd0c2caf9a83559f",
+        "type": "tab",
+        "label": "ZERON",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9ba8d31d3e9ae8dd",
+        "type": "inject",
+        "z": "bd0c2caf9a83559f",
+        "name": "8:00",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 08 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 40,
+        "wires": [
+            [
+                "b1c0b191640a62ab"
+            ]
+        ]
+    },
+    {
+        "id": "b1c0b191640a62ab",
+        "type": "http request",
+        "z": "bd0c2caf9a83559f",
+        "name": "HERON API",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://ppanag.github.io/json-apis/zeron.json",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": true,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 330,
+        "y": 40,
+        "wires": [
+            [
+                "93850d0528ae4960"
+            ]
+        ]
+    },
+    {
+        "id": "93850d0528ae4960",
+        "type": "switch",
+        "z": "bd0c2caf9a83559f",
+        "name": "error check",
+        "property": "payload.ok",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 530,
+        "y": 40,
+        "wires": [
+            [
+                "acde04dd6bb905b1",
+                "ec6b244ee40940c9"
+            ],
+            [
+                "b5a4493186af9e65"
+            ]
+        ]
+    },
+    {
+        "id": "acde04dd6bb905b1",
+        "type": "change",
+        "z": "bd0c2caf9a83559f",
+        "name": "set start delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "(payload.start-8)*3600*1000",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "8cac491f887f3df3"
+            ]
+        ]
+    },
+    {
+        "id": "ec6b244ee40940c9",
+        "type": "change",
+        "z": "bd0c2caf9a83559f",
+        "name": "set stop delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "(payload.stop-8)*3600*1000",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 140,
+        "y": 280,
+        "wires": [
+            [
+                "6113d7ba35dcf6ee"
+            ]
+        ]
+    },
+    {
+        "id": "8cac491f887f3df3",
+        "type": "delay",
+        "z": "bd0c2caf9a83559f",
+        "name": "delay until start-time",
+        "pauseType": "delayv",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "1e73b97f16433f44"
+            ]
+        ]
+    },
+    {
+        "id": "6113d7ba35dcf6ee",
+        "type": "delay",
+        "z": "bd0c2caf9a83559f",
+        "name": "delay until stop-time",
+        "pauseType": "delayv",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "5455de0df7b40697"
+            ]
+        ]
+    },
+    {
+        "id": "1e73b97f16433f44",
+        "type": "change",
+        "z": "bd0c2caf9a83559f",
+        "name": "<set value for start here!>",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 140,
+        "wires": [
+            [
+                "5ee16bcda6e34e06"
+            ]
+        ]
+    },
+    {
+        "id": "5455de0df7b40697",
+        "type": "change",
+        "z": "bd0c2caf9a83559f",
+        "name": "<set value for stop here!>",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 280,
+        "wires": [
+            [
+                "5ee16bcda6e34e06"
+            ]
+        ]
+    },
+    {
+        "id": "b5a4493186af9e65",
+        "type": "debug",
+        "z": "bd0c2caf9a83559f",
+        "name": "error ",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "591ded9841f062c7",
+        "type": "comment",
+        "z": "bd0c2caf9a83559f",
+        "name": "<dESS or AC system control node here!>",
+        "info": "",
+        "x": 880,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "de1017998de3e51a",
+        "type": "comment",
+        "z": "bd0c2caf9a83559f",
+        "name": "<dESS or AC system control node here!>",
+        "info": "",
+        "x": 880,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5ee16bcda6e34e06",
+        "type": "debug",
+        "z": "bd0c2caf9a83559f",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 440,
+        "wires": []
+    }
+]
