@@ -187,7 +187,7 @@
         "y": 140,
         "wires": [
             [
-                "5ee16bcda6e34e06"
+                "4aa658bfea77448f"
             ]
         ]
     },
@@ -214,7 +214,7 @@
         "y": 280,
         "wires": [
             [
-                "5ee16bcda6e34e06"
+                "4aa658bfea77448f"
             ]
         ]
     },
@@ -241,8 +241,8 @@
         "z": "bd0c2caf9a83559f",
         "name": "<VE.bus System Control  here - switch position>",
         "info": "",
-        "x": 900,
-        "y": 140,
+        "x": 1140,
+        "y": 200,
         "wires": []
     },
     {
@@ -257,17 +257,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "8993eba8fc6dedd9",
-        "type": "comment",
-        "z": "bd0c2caf9a83559f",
-        "name": "<VE.bus System Control  here - switch position>",
-        "info": "",
-        "x": 900,
+        "x": 1000,
         "y": 280,
         "wires": []
     },
@@ -342,6 +332,23 @@
                 "6113d7ba35dcf6ee",
                 "8cac491f887f3df3"
             ]
+        ]
+    },
+    {
+        "id": "4aa658bfea77448f",
+        "type": "change",
+        "z": "bd0c2caf9a83559f",
+        "name": "pass to Victron",
+        "rules": [],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 860,
+        "y": 200,
+        "wires": [
+            []
         ]
     }
 ]
