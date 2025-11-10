@@ -1,24 +1,30 @@
 [
     {
-        "id": "bd0c2caf9a83559f",
+        "id": "787141a2d81b8031",
         "type": "tab",
-        "label": "ZERON",
+        "label": "ZERON2",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "9ba8d31d3e9ae8dd",
+        "id": "f420992c2d961a70",
         "type": "inject",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "8:00",
         "props": [
             {
                 "p": "payload"
             },
             {
-                "p": "topic",
-                "vt": "str"
+                "p": "requestTimeout",
+                "v": "3000",
+                "vt": "num"
+            },
+            {
+                "p": "delay",
+                "v": "$random()*300*1000\t",
+                "vt": "jsonata"
             }
         ],
         "repeat": "",
@@ -32,14 +38,14 @@
         "y": 40,
         "wires": [
             [
-                "b1c0b191640a62ab"
+                "ae4afbb3ada351b7"
             ]
         ]
     },
     {
-        "id": "b1c0b191640a62ab",
+        "id": "ceddbaae98931d1f",
         "type": "http request",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "heron api",
         "method": "GET",
         "ret": "obj",
@@ -52,20 +58,27 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 320,
+        "x": 540,
         "y": 40,
         "wires": [
             [
-                "2529920f1f4aae93"
+                "f48c27d872351464"
             ]
         ]
     },
     {
-        "id": "acde04dd6bb905b1",
+        "id": "51c10ff9088b633f",
         "type": "change",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "set start delay",
         "rules": [
+            {
+                "t": "move",
+                "p": "delay",
+                "pt": "msg",
+                "to": "rand_delay",
+                "tot": "msg"
+            },
             {
                 "t": "set",
                 "p": "delay",
@@ -80,24 +93,31 @@
         "to": "",
         "reg": false,
         "x": 140,
-        "y": 140,
+        "y": 200,
         "wires": [
             [
-                "8cac491f887f3df3"
+                "fabb717cad0d396f"
             ]
         ]
     },
     {
-        "id": "ec6b244ee40940c9",
+        "id": "5f9a0c0b5c70e161",
         "type": "change",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "set stop delay",
         "rules": [
+            {
+                "t": "move",
+                "p": "delay",
+                "pt": "msg",
+                "to": "rand_delay",
+                "tot": "msg"
+            },
             {
                 "t": "set",
                 "p": "delay",
                 "pt": "msg",
-                "to": "(payload.stop-8)*3600*1000",
+                "to": "(payload.stop-8)*3600*1000-2*rand_delay",
                 "tot": "jsonata"
             }
         ],
@@ -107,17 +127,17 @@
         "to": "",
         "reg": false,
         "x": 140,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
-                "6113d7ba35dcf6ee"
+                "5d2690c8486311cc"
             ]
         ]
     },
     {
-        "id": "8cac491f887f3df3",
+        "id": "fabb717cad0d396f",
         "type": "delay",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "delay until start-time",
         "pauseType": "delayv",
         "timeout": "1",
@@ -131,18 +151,18 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 340,
-        "y": 140,
+        "x": 400,
+        "y": 200,
         "wires": [
             [
-                "1e73b97f16433f44"
+                "2cfaf6d21caf2061"
             ]
         ]
     },
     {
-        "id": "6113d7ba35dcf6ee",
+        "id": "5d2690c8486311cc",
         "type": "delay",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "delay until stop-time",
         "pauseType": "delayv",
         "timeout": "1",
@@ -156,18 +176,18 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 340,
-        "y": 280,
+        "x": 400,
+        "y": 320,
         "wires": [
             [
-                "5455de0df7b40697"
+                "97802ee5525603eb"
             ]
         ]
     },
     {
-        "id": "1e73b97f16433f44",
+        "id": "2cfaf6d21caf2061",
         "type": "change",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "<set value for start here!>",
         "rules": [
             {
@@ -183,18 +203,18 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 570,
-        "y": 140,
+        "x": 650,
+        "y": 200,
         "wires": [
             [
-                "4aa658bfea77448f"
+                "b2d0c60e56ef40d4"
             ]
         ]
     },
     {
-        "id": "5455de0df7b40697",
+        "id": "97802ee5525603eb",
         "type": "change",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "<set value for stop here!>",
         "rules": [
             {
@@ -210,18 +230,18 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 570,
-        "y": 280,
+        "x": 650,
+        "y": 320,
         "wires": [
             [
-                "4aa658bfea77448f"
+                "b2d0c60e56ef40d4"
             ]
         ]
     },
     {
-        "id": "b5a4493186af9e65",
+        "id": "94973db9ca581dbe",
         "type": "debug",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "debug",
         "active": true,
         "tosidebar": true,
@@ -231,24 +251,24 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 890,
-        "y": 20,
+        "x": 950,
+        "y": 40,
         "wires": []
     },
     {
-        "id": "591ded9841f062c7",
+        "id": "f1d962c54069bd77",
         "type": "comment",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "<VE.bus System Control  here - switch position>",
         "info": "",
-        "x": 1140,
-        "y": 200,
+        "x": 1180,
+        "y": 260,
         "wires": []
     },
     {
-        "id": "5ee16bcda6e34e06",
+        "id": "a42f12f4bc77eb6d",
         "type": "debug",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "debug 22",
         "active": true,
         "tosidebar": true,
@@ -257,14 +277,14 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1000,
-        "y": 280,
+        "x": 1060,
+        "y": 320,
         "wires": []
     },
     {
-        "id": "2529920f1f4aae93",
+        "id": "f48c27d872351464",
         "type": "function",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "api error check",
         "func": "let d = msg.payload.date.split('/');\nlet msgDate = new Date(2000 + +d[2], d[1]-1, d[0]);\nlet today = new Date();\nlet sameDay = msgDate.toDateString() === today.toDateString();\nlet isValid = sameDay && msg.payload.ok == 1;\nreturn [isValid ? msg : null, !isValid ? msg : null];\n",
         "outputs": 2,
@@ -273,23 +293,23 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 560,
+        "x": 720,
         "y": 40,
         "wires": [
             [
-                "acde04dd6bb905b1",
-                "ec6b244ee40940c9",
-                "b5a4493186af9e65"
+                "51c10ff9088b633f",
+                "5f9a0c0b5c70e161",
+                "94973db9ca581dbe"
             ],
             [
-                "8bc3af07a5c18c9d"
+                "8cd592677e039a55"
             ]
         ]
     },
     {
-        "id": "8bc3af07a5c18c9d",
+        "id": "8cd592677e039a55",
         "type": "debug",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "errors",
         "active": true,
         "tosidebar": true,
@@ -299,14 +319,14 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 890,
-        "y": 80,
+        "x": 950,
+        "y": 100,
         "wires": []
     },
     {
-        "id": "d516dfa1220e2c39",
+        "id": "a91865c94d8dd3aa",
         "type": "inject",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "reset",
         "props": [
             {
@@ -325,19 +345,20 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 310,
-        "y": 420,
+        "x": 130,
+        "y": 100,
         "wires": [
             [
-                "6113d7ba35dcf6ee",
-                "8cac491f887f3df3"
+                "5d2690c8486311cc",
+                "fabb717cad0d396f",
+                "ae4afbb3ada351b7"
             ]
         ]
     },
     {
-        "id": "4aa658bfea77448f",
+        "id": "b2d0c60e56ef40d4",
         "type": "change",
-        "z": "bd0c2caf9a83559f",
+        "z": "787141a2d81b8031",
         "name": "pass to Victron",
         "rules": [],
         "action": "",
@@ -346,9 +367,71 @@
         "to": "",
         "reg": false,
         "x": 860,
-        "y": 200,
+        "y": 260,
         "wires": [
-            []
+            [
+                "a42f12f4bc77eb6d"
+            ]
+        ]
+    },
+    {
+        "id": "ae4afbb3ada351b7",
+        "type": "delay",
+        "z": "787141a2d81b8031",
+        "name": "random delay 0-300 sec",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "100",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 330,
+        "y": 40,
+        "wires": [
+            [
+                "ceddbaae98931d1f"
+            ]
+        ]
+    },
+    {
+        "id": "8ef5d394fe43b733",
+        "type": "inject",
+        "z": "787141a2d81b8031",
+        "name": "test",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "requestTimeout",
+                "v": "3000",
+                "vt": "num"
+            },
+            {
+                "p": "delay",
+                "v": "$random()*300*1000\t",
+                "vt": "jsonata"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 520,
+        "wires": [
+            [
+                "ceddbaae98931d1f"
+            ]
         ]
     }
 ]
